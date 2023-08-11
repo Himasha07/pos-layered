@@ -22,6 +22,23 @@ public class CustomerDto {
     private String province;
     private String zip;
 
+    public CustomerDto() {
+    }
+
+    public CustomerDto(String id, String title, String name, String dob, Double salary, String address, String city, String province, String zip) {
+        this.id = id;
+        this.title = title;
+        this.name = name;
+        this.dob = dob;
+        this.salary = salary;
+        this.address = address;
+        this.city = city;
+        this.province = province;
+        this.zip = zip;
+    }
+    
+    
+    
     public String getId() {
         return id;
     }

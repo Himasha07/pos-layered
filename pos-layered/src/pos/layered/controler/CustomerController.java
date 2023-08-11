@@ -14,7 +14,7 @@ import pos.layered.service.customer.CustomerService;
  */
 public class CustomerController {
     
-    CustomerService customerService = ServiceFactory.getInstance().getService()
+    CustomerService customerService = (CustomerService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.Customer);
 
     public String addCustomer(CustomerDto customerDto) throws Exception {
         return customerService.addCustomer(customerDto);
