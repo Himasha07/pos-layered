@@ -4,7 +4,10 @@
  */
 package pos.layered.service.customer.impl;
 
+import pos.layered.dao.customer.CustomerDao;
+import pos.layered.dao.DaoFactory;
 import pos.layered.dto.CustomerDto;
+import pos.layered.entity.CustomerEntity;
 import pos.layered.service.customer.CustomerService;
 
 /**
@@ -13,7 +16,25 @@ import pos.layered.service.customer.CustomerService;
  */
 public class CustomerServiceImpl implements CustomerService{
     
-    public String addCustomer(CustomerDto customerDto){
-        return null;
+    CustomerDao customerDao = (CustomerDao) DaoFactory.getInstance().getDao(DaoFactory.daoType.CUSTOMER);
+    
+    public String addCustomer(CustomerDto dto) throws Exception{
+        
+        CustomerEntity ce = new CustomerEntity(dto.getId(),
+                dto.getTitle(),
+                dto.getName(),
+                dto.getDob(),
+                dto.getSalary(),
+                dto.getAddress(),
+                dto.getCity(),
+                dto.getProvince(),
+                dto.getZip());
+        
+        if(customerDao.addCustomer(ce)){
+            return "Successfully added";
+        }
+        return "Fail";
+    
     }
+    
 }
