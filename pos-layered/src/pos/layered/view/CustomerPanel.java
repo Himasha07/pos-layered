@@ -4,16 +4,26 @@
  */
 package pos.layered.view;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import pos.layered.controler.CustomerController;
+import pos.layered.dto.CustomerDto;
+
 /**
  *
  * @author Himasha Lokusuriya
  */
 public class CustomerPanel extends javax.swing.JPanel {
 
+        private CustomerController customerController;
+        private CustomerDto customerDto;
     /**
      * Creates new form CustomerPanel
      */
     public CustomerPanel() {
+        customerController = new CustomerController();
+       
         initComponents();
     }
 
@@ -391,7 +401,11 @@ public class CustomerPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_deletebuttonActionPerformed
 
     private void addbutton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbutton2ActionPerformed
-
+            try {
+                addCustomer();
+            } catch (Exception ex) {
+                Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_addbutton2ActionPerformed
 
     private void custSalaryText1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custSalaryText1ActionPerformed
@@ -434,4 +448,34 @@ public class CustomerPanel extends javax.swing.JPanel {
     private javax.swing.JPanel tablePanel;
     private javax.swing.JButton updatebutton;
     // End of variables declaration//GEN-END:variables
+
+    private void addCustomer() throws Exception {
+        CustomerDto customerDto = new CustomerDto(custidtext.getText(),
+        custtitletext.getText(),
+        custNameText.getText(),
+        custDOBText.getText(),
+        Double.parseDouble(custSalaryText1.getText()),
+        custAdderssText.getText(),
+        custCityText.getText(),
+        custProvinceText.getText(),
+        custPCText.getText());
+        
+        String result = customerController.addCustomer(customerDto);
+        JOptionPane.showMessageDialog(this, result);
+        
+        clear();
+    }
+    
+     private void clear(){
+        custidtext.setText("");
+        custtitletext.setText("");
+        custNameText.setText("");
+        custDOBText.setText("");
+        custAdderssText.setText("");
+        custCityText.setText("");
+        custProvinceText.setText("");
+        custPCText.setText("");
+        custSalaryText1.setText("");
+        
+    }
 }
